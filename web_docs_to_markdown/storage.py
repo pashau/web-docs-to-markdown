@@ -62,10 +62,7 @@ class Storage:
         domain = slugify(parsed.netloc, max_length=120)
 
         path_parts = [part for part in parsed.path.split("/") if part]
-        if path_parts:
-            base = "-".join(path_parts)
-        else:
-            base = "index"
+        base = "-".join(path_parts) if path_parts else "index"
 
         slug = slugify(base, max_length=100)
         unique_suffix = stable_id(document.final_url, length=10)

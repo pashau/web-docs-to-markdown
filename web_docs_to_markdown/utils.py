@@ -7,13 +7,12 @@ from urllib.parse import (
     parse_qsl,
     quote,
     unquote,
-    urlencode,
     urldefrag,
+    urlencode,
     urljoin,
     urlparse,
     urlunparse,
 )
-
 
 TRACKING_QUERY_PARAMS = {
     "fbclid",
@@ -129,10 +128,7 @@ def normalize_url(url: str, base_url: str | None = None) -> str | None:
     port = parsed.port
     netloc = hostname
 
-    if port and not (
-        (scheme == "http" and port == 80)
-        or (scheme == "https" and port == 443)
-    ):
+    if port and not ((scheme == "http" and port == 80) or (scheme == "https" and port == 443)):
         netloc = f"{hostname}:{port}"
 
     raw_path = parsed.path or "/"

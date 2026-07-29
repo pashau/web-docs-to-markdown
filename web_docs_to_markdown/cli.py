@@ -26,8 +26,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-dir",
         default=None,
         help=(
-            "Override base output directory from YAML configuration. "
-            "Example: --output-dir output"
+            "Override base output directory from YAML configuration. Example: --output-dir output"
         ),
     )
 
@@ -100,9 +99,7 @@ def resolve_output_dir(
     base_output_dir = Path(output_dir_override) if output_dir_override else config.output_dir
 
     output_name = (
-        output_name_override
-        if output_name_override is not None
-        else config.storage.output_name
+        output_name_override if output_name_override is not None else config.storage.output_name
     )
 
     output_name = str(output_name or "auto").strip()
@@ -129,10 +126,7 @@ def build_default_output_name(config: AppConfig) -> str:
 
     timestamp = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
 
-    if path_slug:
-        name = f"{domain_slug}-{path_slug}-{timestamp}"
-    else:
-        name = f"{domain_slug}-{timestamp}"
+    name = f"{domain_slug}-{path_slug}-{timestamp}" if path_slug else f"{domain_slug}-{timestamp}"
 
     return slugify(name, max_length=140)
 

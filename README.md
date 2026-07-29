@@ -111,6 +111,45 @@ browser:
 
 In that case, Playwright is not used at runtime.
 
+## Development checks
+
+This repository uses lightweight static checks:
+
+- `ruff` for linting and formatting
+- `bandit` for basic security scanning
+- `pip-audit` for dependency vulnerability checks
+- GitHub Actions for CI
+- Dependabot for automated dependency update PRs
+
+Install development tools:
+
+```bash
+pip install -r requirements-dev.txt
+```
+
+Run checks locally:
+
+```bash
+ruff check .
+ruff format --check .
+bandit -c pyproject.toml -r web_docs_to_markdown
+pip-audit
+```
+
+Auto-format code:
+
+```bash
+ruff format .
+ruff check . --fix
+```
+
+Optional pre-commit setup:
+
+```bash
+pre-commit install
+pre-commit run --all-files
+```
+
 ## CLI usage
 
 ```bash

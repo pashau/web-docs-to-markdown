@@ -5,7 +5,6 @@ import re
 import time
 from collections import deque
 from datetime import UTC, datetime
-from typing import Deque
 from urllib.robotparser import RobotFileParser
 
 import requests
@@ -76,7 +75,7 @@ class Crawler:
     def _run(self) -> CrawlStats:
         self.storage.prepare()
 
-        queue: Deque[tuple[str, int, str]] = deque()
+        queue: deque[tuple[str, int, str]] = deque()
         seen: set[str] = set()
 
         for seed in self.seeds:
@@ -107,10 +106,9 @@ class Crawler:
 
             final_url = normalize_url(response.url) or url
 
-            if final_url != url:
-                if not self._is_allowed_url(final_url):
-                    self._skip("Redirect target not allowed", final_url)
-                    continue
+            if final_url != url and not self._is_allowed_url(final_url):
+                self._skip("Redirect target not allowed", final_url)
+                continue
 
             content_type = self._get_content_type(response.headers)
 

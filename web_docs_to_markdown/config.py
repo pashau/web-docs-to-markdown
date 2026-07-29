@@ -22,9 +22,7 @@ class BrowserConfig:
     extra_wait_ms: int = 1000
     wait_for_selector: str = ""
     block_resources: bool = True
-    blocked_resource_types: list[str] = field(
-        default_factory=lambda: ["image", "media", "font"]
-    )
+    blocked_resource_types: list[str] = field(default_factory=lambda: ["image", "media", "font"])
 
 
 @dataclass
@@ -132,9 +130,7 @@ def load_config(path: Path) -> AppConfig:
             request_delay_seconds=float(crawl_raw.get("request_delay_seconds", 0.25)),
             include_patterns=_str_list(crawl_raw.get("include_patterns") or []),
             exclude_patterns=_str_list(crawl_raw.get("exclude_patterns") or []),
-            link_exclude_selectors=_str_list(
-                crawl_raw.get("link_exclude_selectors") or []
-            ),
+            link_exclude_selectors=_str_list(crawl_raw.get("link_exclude_selectors") or []),
         ),
         markdown=MarkdownConfig(
             min_content_chars=int(markdown_raw.get("min_content_chars", 200)),

@@ -221,9 +221,7 @@ class ContentExtractor:
         candidates: list[Tag] = []
 
         for selector in MAIN_CONTENT_SELECTORS:
-            candidates.extend(
-                node for node in soup.select(selector) if isinstance(node, Tag)
-            )
+            candidates.extend(node for node in soup.select(selector) if isinstance(node, Tag))
 
         if not candidates and soup.body:
             direct_candidates = [

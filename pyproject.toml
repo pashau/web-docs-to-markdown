@@ -1,0 +1,39 @@
+[project]
+name = "web-docs-to-markdown"
+version = "1.0.0"
+description = "Crawl documentation websites and save cleaned Markdown files for RAG ingestion."
+requires-python = ">=3.13"
+
+[tool.ruff]
+target-version = "py313"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+  "E",
+  "F",
+  "I",
+  "B",
+  "UP",
+  "SIM",
+  "C4",
+  "PIE",
+  "RUF",
+]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.bandit]
+exclude_dirs = [
+  ".venv",
+  "venv",
+  "env",
+  "__pycache__",
+]
+skips = [
+  "B101"
+]
