@@ -1,5 +1,7 @@
 # web-docs-to-markdown
 
+![CI](https://github.com/pashau/web-docs-to-markdown/actions/workflows/ci.yml/badge.svg)
+
 `web-docs-to-markdown` is a dockerized Python 3.13 CLI tool for crawling external documentation websites and saving cleaned pages as Markdown files.
 
 The generated output is designed to be useful as a knowledge source for RAG systems such as:
