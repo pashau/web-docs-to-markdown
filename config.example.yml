@@ -1,0 +1,174 @@
+seeds:
+  - "https://docs.example.com/guide/getting-started"
+
+output_dir: "output"
+
+http:
+  user_agent: "web-docs-to-markdown/1.0 (+https://example.com/bot)"
+  timeout_seconds: 30
+  max_retries: 2
+
+browser:
+  # Enable this for JavaScript-rendered documentation sites.
+  # Examples: SPA-based docs, Confluence-like docs, React/Vue/Angular docs.
+  enabled: true
+  headless: true
+
+  # Possible values:
+  # - domcontentloaded: faster, often enough
+  # - load: waits for normal load event
+  # - networkidle: waits for network to become idle, useful for SPAs but slower
+  wait_until: "networkidle"
+
+  # Extra wait time after page.goto().
+  # Useful for slow client-side rendering.
+  extra_wait_ms: 1500
+
+  # Optional CSS selector to wait for.
+  # Examples:
+  # wait_for_selector: "main"
+  # wait_for_selector: "article"
+  # wait_for_selector: "[role='main']"
+  wait_for_selector: ""
+
+  # Block heavy resources to speed up crawling.
+  block_resources: true
+  blocked_resource_types:
+    - "image"
+    - "media"
+    - "font"
+
+crawl:
+  respect_robots_txt: true
+  same_domain_only: true
+  max_depth: 1
+  max_pages: 20
+  request_delay_seconds: 0.5
+
+  # If empty, all matching same-domain HTML URLs are allowed,
+  # unless excluded by exclude_patterns.
+  #
+  # Example:
+  # include_patterns:
+  #   - "https://docs\\.example\\.com/guide/"
+  include_patterns: []
+
+  exclude_patterns:
+    - "/search"
+    - "/login"
+    - "/logout"
+    - "/signup"
+    - "/register"
+    - "/users/"
+    - "/plugins/"
+    - "/download/"
+    - "\\.pdf$"
+    - "\\.zip$"
+    - "\\.png$"
+    - "\\.jpg$"
+    - "\\.jpeg$"
+    - "\\.gif$"
+    - "\\.svg$"
+
+  # These areas are removed before links are collected for crawling.
+  # This prevents menu, sidebar, header, footer, pagination, and TOC links
+  # from being added to the crawl queue.
+  #
+  # Uses CSS selectors, not XPath.
+  link_exclude_selectors:
+    - "header"
+    - "nav"
+    - "footer"
+    - "aside"
+    - "form"
+    - "[role='navigation']"
+    - "[role='banner']"
+    - "[role='contentinfo']"
+    - ".sidebar"
+    - ".side-bar"
+    - "[class*='sidebar']"
+    - ".toc"
+    - ".table-of-contents"
+    - "[class*='toc']"
+    - ".breadcrumb"
+    - ".breadcrumbs"
+    - ".pagination"
+    - ".pager"
+    - ".navbar"
+    - ".menu"
+    - ".site-header"
+    - ".site-footer"
+    - ".page-tree"
+    - ".side-navigation"
+    - "[data-testid='side-navigation']"
+    - "[data-testid='page-tree']"
+
+markdown:
+  min_content_chars: 100
+  include_frontmatter: true
+
+  # These areas are removed before HTML is converted to Markdown.
+  #
+  # Uses CSS selectors, not XPath.
+  remove_selectors:
+    - "script"
+    - "style"
+    - "noscript"
+    - "template"
+    - "svg"
+    - "canvas"
+    - "iframe"
+    - "header"
+    - "nav"
+    - "footer"
+    - "aside"
+    - "form"
+    - "button"
+    - "input"
+    - "select"
+    - "textarea"
+    - "[aria-hidden='true']"
+    - "[role='navigation']"
+    - "[role='banner']"
+    - "[role='contentinfo']"
+    - ".sidebar"
+    - ".side-bar"
+    - "[class*='sidebar']"
+    - ".toc"
+    - ".table-of-contents"
+    - "[class*='toc']"
+    - ".breadcrumb"
+    - ".breadcrumbs"
+    - ".pagination"
+    - ".pager"
+    - ".navbar"
+    - ".menu"
+    - ".site-header"
+    - ".site-footer"
+    - ".page-tree"
+    - ".side-navigation"
+    - ".cookie"
+    - ".cookie-banner"
+    - ".announcement"
+    - ".advertisement"
+    - ".ads"
+    - "[data-testid='side-navigation']"
+    - "[data-testid='page-tree']"
+
+storage:
+  overwrite: true
+
+  # Output folder behavior:
+  #
+  # "auto":
+  #   Creates a useful run folder automatically, for example:
+  #   output/docs-example-com-getting-started-20260728-081419/
+  #
+  # "none":
+  #   Writes directly into output_dir, for example:
+  #   output/
+  #
+  # custom value:
+  #   Creates output/<custom-value>/, for example:
+  #   output/my-docs-crawl/
+  output_name: "auto"

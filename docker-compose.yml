@@ -1,0 +1,17 @@
+services:
+  web-docs-to-markdown:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: web-docs-to-markdown:latest
+    container_name: web-docs-to-markdown
+    volumes:
+      - ./config.yml:/app/config.yml:ro
+      - ./output:/app/output
+    command:
+      - python
+      - -m
+      - web_docs_to_markdown
+      - --config
+      - /app/config.yml
+      - --verbose
